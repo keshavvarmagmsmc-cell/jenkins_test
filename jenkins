@@ -1,0 +1,39 @@
+pipeline {
+  agent any
+    tools{
+      jdk 'jdk21'
+    }
+    stages {
+      stage('checkout'){
+        steps{
+          git branch : 'main',url:'https://github.com/1ms24mc037-Jeevan/Jenkins_Test'
+        }
+    }
+    stage('java compile'){
+      steps{
+        echo 'Compiling java program...'
+        sh 'javac hello.java'
+      }
+  }
+    stage('java execute'){
+      steps{
+         echo 'Executing java program...'
+        sh 'java hello'
+      }
+  }
+    stage('python executing'){
+      steps{
+        echo 'Executing python program...'
+        sh 'python3 hello.py'
+      }
+  }
+}
+post{
+  success{
+    echo 'excecution successfull'
+  }
+  failure{
+    echo 'build failed'
+  }
+}
+}
